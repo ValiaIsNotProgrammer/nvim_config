@@ -1,13 +1,19 @@
 return {
   "nvim-telescope/telescope.nvim",
-  dependencies = { "nvim-lua/plenary.nvim" },
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    { "nvim-telescope/telescope-live-grep-args.nvim", version = "^1.0.0" },
+  },
   cmd = "Telescope",
   keys = {
     { "<leader>ff", "<cmd>Telescope find_files<CR>", desc = "Find files" },
-    { "<leader>fg", "<cmd>Telescope live_grep<CR>", desc = "Live grep" },
+    { "<leader>fg", function()
+      require("telescope").extensions.live_grep_args.live_grep_args()
+    end, desc = "Live grep with filters" },
   },
   config = function()
     local actions = require("telescope.actions")
+    local action_layout = require("telescope.actions.layout")
 
     require("telescope").setup {
       defaults = {
@@ -26,12 +32,15 @@ return {
         },
         mappings = {
           i = {
-            ["<C-c>"] = actions.close,
-            ["<C-s>"] = actions.select_vertical,
+            ["<C-p>"] = require("telescope.actions.layout").toggle_preview,
+          },
+          n = {
+            ["<C-p>"] = require("telescope.actions.layout").toggle_preview,
           },
         },
       },
     }
+    require("telescope").load_extension("live_grep_args")
   end,
 }
 

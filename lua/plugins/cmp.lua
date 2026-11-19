@@ -47,15 +47,12 @@ return {
         { name = 'nvim_lsp' },
         { name = 'vsnip' }
       }, {
-        { name = 'buffer' },
-        { name = 'nvim_lsp_signature_help' }
+        { name = 'buffer' }
       })
     })
 
     cmp.setup.filetype('gitcommit', {
       sources = cmp.config.sources({
-        { name = 'cmp_git' }
-      }, {
         { name = 'buffer' }
       })
     })
