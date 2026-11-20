@@ -1,10 +1,14 @@
 
 -- Registers
-vim.keymap.set("n", "x", '"_x', { noremap = true, silent = true })
-vim.keymap.set("n", "d", '"_d', { noremap = true, silent = true })
-vim.keymap.set("n", "dd", '"_dd', { noremap = true, silent = true })
-vim.keymap.set("v", "d", '"_d', { noremap = true, silent = true })
-vim.keymap.set("x", "p", '"_dP', { noremap = true, silent = true })
+vim.keymap.set({ "n", "x" }, "y", '"+y', { silent = true, desc = "Copy to clipboard" })
+vim.keymap.set("n", "Y", '"+y$', { silent = true, desc = "Copy to clipboard to end of line" })
+vim.keymap.set("x", "Y", '"+Y', { silent = true, desc = "Copy lines to clipboard" })
+vim.keymap.set("n", "p", '"+p', { silent = true, desc = "Paste from clipboard" })
+vim.keymap.set("n", "P", '"+P', { silent = true, desc = "Paste before from clipboard" })
+-- Visual P replaces the selection without overwriting the clipboard.
+for _, key in ipairs({ "p", "P" }) do
+  vim.keymap.set("x", key, '"+P', { silent = true, desc = "Replace selection from clipboard" })
+end
 
 -- Tabs
 vim.keymap.set('n', 'H', ':tabp<CR>', { noremap = true, silent = true })

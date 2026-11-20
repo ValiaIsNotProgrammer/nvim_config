@@ -36,7 +36,8 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- Clipboard
-vim.opt.clipboard = "unnamedplus"
+-- Keep deletions in Neovim registers; copy/paste mappings use the clipboard explicitly.
+vim.opt.clipboard = ""
 
 -- Shorter messages
 vim.opt.shortmess:append("c")
